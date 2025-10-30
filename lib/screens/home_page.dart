@@ -1,8 +1,9 @@
+import 'package:exercici_2/screens/alert_page.dart';
+import 'package:exercici_2/utils/icono_string_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:exercici_2/providers/menu_providers.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,19 +14,35 @@ class HomePage extends StatelessWidget {
   }
 }
 
-Widget _llista(){
- // Retornam un Widget de tipus ListView,
- // el children del qual és un mètode
- //que retornarà una llista de Widgets
- return ListView(
-   children: _llistaElements(),
- );
+Widget _llista() {
+  // menuProvider.CarregarDades()
+  return FutureBuilder(
+    future: menuProvider.CarregarDades(),
+    initialData:
+        [], // Aquest seria el valor per defecte que s'envia a snapshot.data
+    builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+      print('builder');
+      print(snapshot.data);
+      return ListView(children: _llistaElements(context, snapshot.data));
+    },
+  );
 }
 
+List<Widget> _llistaElements(BuildContext context, List<dynamic>? data ) {
+ final List<Widget> elements =[];
+ data?.forEach((element) {
+   final widgetTemp = ListTile(
+     title: Text(element['texte']),
+     leading: getIcon(element['icona']),
+     trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
+     onTap: (){
+       Navigator.pushNamed(context, element['ruta']);
+     },
 
-List<Widget> _llistaElements() {
- // Prova menuProvider
- print(menuProvider.opcions);
- // Retorna llista buida
- return [];
+   );
+   elements..add(widgetTemp)
+           ..add(Divider());
+ });
+ return  elements;
 }
+

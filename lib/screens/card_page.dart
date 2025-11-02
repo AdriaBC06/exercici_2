@@ -6,8 +6,25 @@ class CardPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Cards')),
       body: ListView(
-        padding: EdgeInsets.all(10.0),
-        children: [_cardTipus1(), SizedBox(height: 30.0), _cardTipus2()],
+       padding: EdgeInsets.all(10.0),
+       children: [
+         _cardTipus1(),
+         SizedBox(height: 30.0),
+         _cardTipus2(),
+         SizedBox(height: 30.0),
+         _cardTipus1(),
+         SizedBox(height: 30.0),
+         _cardTipus2(),
+         SizedBox(height: 30.0),
+         _cardTipus1(),
+         SizedBox(height: 30.0),
+         _cardTipus2(),
+         SizedBox(height: 30.0),
+         _cardTipus1(),
+         SizedBox(height: 30.0),
+         _cardTipus2(),
+         SizedBox(height: 30.0),
+       ],
       ),
     );
   }
@@ -15,6 +32,8 @@ class CardPage extends StatelessWidget {
 
 Widget _cardTipus1() {
   return Card(
+    elevation: 10.0,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
     child: Column(
       children: [
         ListTile(
@@ -37,7 +56,8 @@ Widget _cardTipus1() {
 }
 
 Widget _cardTipus2() {
-  return Card(
+  final targeta = Card(
+    // clipBehavior: Clip.antiAlias,
     child: Column(
       children: [
         FadeInImage(
@@ -45,12 +65,27 @@ Widget _cardTipus2() {
           image: NetworkImage(
             'https://upload-os-bbs.hoyolab.com/upload/2025/01/26/347074628/910d25952399a466227f0efb3c45ee6a_3187046766951281864.webp?x-oss-process=image%2Fresize%2Cs_1000%2Fauto-orient%2C0%2Finterlace%2C1%2Fformat%2Cwebp%2Fquality%2Cq_70',
           ),
-          fadeInDuration: Duration(milliseconds: 1000),
+          fadeInDuration: Duration(milliseconds: 3000),
           height: 250,
           fit: BoxFit.cover,
         ),
         Container(child: Text('Kasane Pearto :3'), padding: EdgeInsets.all(10)),
       ],
+    ),
+  );
+  return Container(
+    child: ClipRRect(child: targeta, borderRadius: BorderRadius.circular(30.0)),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(30.0),
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+          color: Colors.black26,
+          blurRadius: 10.0,
+          spreadRadius: 2.0,
+          offset: Offset(2.0, 10.0),
+        ),
+      ],
+      color: Colors.white,
     ),
   );
 }
